@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StockPlatform")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be810ffafcbaa569cb43fed5b96826b82dba2672")]
 [assembly: System.Reflection.AssemblyProductAttribute("StockPlatform")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StockPlatform")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

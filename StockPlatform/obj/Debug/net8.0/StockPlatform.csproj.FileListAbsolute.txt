@@ -174,3 +174,6 @@ D:\C# folder\StockPlatform\StockPlatform\bin\Debug\net8.0\Microsoft.AspNetCore.M
 D:\C# folder\StockPlatform\StockPlatform\bin\Debug\net8.0\Microsoft.Azure.Core.NewtonsoftJson.dll
 D:\C# folder\StockPlatform\StockPlatform\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\C# folder\StockPlatform\StockPlatform\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+D:\C# folder\StockPlatform\StockPlatform\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\C# folder\StockPlatform\StockPlatform\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\C# folder\StockPlatform\StockPlatform\obj\Debug\net8.0\StockPlatform.sourcelink.json
