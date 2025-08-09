@@ -1,0 +1,385 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\C# folder\\StockPlatform\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\models\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\models\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\models\\stock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\models\\stock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\repository\\stockrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\repository\\stockrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\helpers\\queryobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\helpers\\queryobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\controllers\\stockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\controllers\\stockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\interfaces\\istockrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\interfaces\\istockrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\interfaces\\icommentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\interfaces\\icommentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\dtos\\stock\\updatefromcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\dtos\\stock\\updatefromcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\dtos\\comments\\createcommentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\dtos\\comments\\createcommentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\mappers\\stockmappers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\mappers\\stockmappers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\dtos\\comments\\commentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\dtos\\comments\\commentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\dtos\\stock\\stockdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\dtos\\stock\\stockdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\mappers\\commentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\mappers\\commentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\repository\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\repository\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\C# folder\\StockPlatform\\StockPlatform\\StockPlatform.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:StockPlatform\\StockPlatform.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\stockplatform.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\stockplatform.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|d:\\c# folder\\stockplatform\\stockplatform\\migrations\\20250802200454_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04DBE74A-F921-4CBB-B92D-96451B01311E}|StockPlatform\\StockPlatform.csproj|solutionrelative:stockplatform\\migrations\\20250802200454_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 10,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppUser.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Models\\AppUser.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Models\\AppUser.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Models\\AppUser.cs",
+              "RelativeToolTip": "StockPlatform\\Models\\AppUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-09T10:14:12.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "QueryObject.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Helpers\\QueryObject.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Helpers\\QueryObject.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Helpers\\QueryObject.cs",
+              "RelativeToolTip": "StockPlatform\\Helpers\\QueryObject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T18:53:04.03Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StockController.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Controllers\\StockController.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Controllers\\StockController.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Controllers\\StockController.cs",
+              "RelativeToolTip": "StockPlatform\\Controllers\\StockController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T20:00:17.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "StockRepository.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Repository\\StockRepository.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Repository\\StockRepository.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Repository\\StockRepository.cs",
+              "RelativeToolTip": "StockPlatform\\Repository\\StockRepository.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAAADoAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T10:16:40.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ICommentRepository.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Interfaces\\ICommentRepository.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Interfaces\\ICommentRepository.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Interfaces\\ICommentRepository.cs",
+              "RelativeToolTip": "StockPlatform\\Interfaces\\ICommentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T20:06:17.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IStockRepository.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Interfaces\\IStockRepository.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Interfaces\\IStockRepository.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Interfaces\\IStockRepository.cs",
+              "RelativeToolTip": "StockPlatform\\Interfaces\\IStockRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T10:13:18.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Stock.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Models\\Stock.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Models\\Stock.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Models\\Stock.cs",
+              "RelativeToolTip": "StockPlatform\\Models\\Stock.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-02T18:03:23.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApplicationDBContext.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Data\\ApplicationDBContext.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Data\\ApplicationDBContext.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Data\\ApplicationDBContext.cs",
+              "RelativeToolTip": "StockPlatform\\Data\\ApplicationDBContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-02T19:43:10.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Program.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Program.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Program.cs",
+              "RelativeToolTip": "StockPlatform\\Program.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABsAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-02T19:56:01.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CreateCommentDto.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\DTOS\\Comments\\CreateCommentDto.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\DTOS\\Comments\\CreateCommentDto.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\DTOS\\Comments\\CreateCommentDto.cs",
+              "RelativeToolTip": "StockPlatform\\DTOS\\Comments\\CreateCommentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T20:06:46.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Controllers\\CommentController.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "StockPlatform\\Controllers\\CommentController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAG0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T20:19:18.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "StockMappers.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Mappers\\StockMappers.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Mappers\\StockMappers.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Mappers\\StockMappers.cs",
+              "RelativeToolTip": "StockPlatform\\Mappers\\StockMappers.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAABQwBMAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T10:19:30.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UpdateFromCreateDto.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\DTOS\\Stock\\UpdateFromCreateDto.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\DTOS\\Stock\\UpdateFromCreateDto.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\DTOS\\Stock\\UpdateFromCreateDto.cs",
+              "RelativeToolTip": "StockPlatform\\DTOS\\Stock\\UpdateFromCreateDto.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAAB8AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-03T19:47:08.673Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CommentDto.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\DTOS\\Comments\\CommentDto.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\DTOS\\Comments\\CommentDto.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\DTOS\\Comments\\CommentDto.cs",
+              "RelativeToolTip": "StockPlatform\\DTOS\\Comments\\CommentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T20:32:42.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "StockDto.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\DTOS\\Stock\\StockDto.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\DTOS\\Stock\\StockDto.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\DTOS\\Stock\\StockDto.cs",
+              "RelativeToolTip": "StockPlatform\\DTOS\\Stock\\StockDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-03T09:45:49.477Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CommentMapper.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Mappers\\CommentMapper.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Mappers\\CommentMapper.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Mappers\\CommentMapper.cs",
+              "RelativeToolTip": "StockPlatform\\Mappers\\CommentMapper.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAIBJwBgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T20:36:10.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CommentRepository.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Repository\\CommentRepository.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Repository\\CommentRepository.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Repository\\CommentRepository.cs",
+              "RelativeToolTip": "StockPlatform\\Repository\\CommentRepository.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAABQwBQAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T20:10:00.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "StockPlatform.csproj",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\StockPlatform.csproj",
+              "RelativeDocumentMoniker": "StockPlatform\\StockPlatform.csproj",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\StockPlatform.csproj",
+              "RelativeToolTip": "StockPlatform\\StockPlatform.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-08-05T11:57:17.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "StockPlatform.csproj.user",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\StockPlatform.csproj.user",
+              "RelativeDocumentMoniker": "StockPlatform\\StockPlatform.csproj.user",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\StockPlatform.csproj.user",
+              "RelativeToolTip": "StockPlatform\\StockPlatform.csproj.user",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2025-08-05T12:01:12.554Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\appsettings.json",
+              "RelativeDocumentMoniker": "StockPlatform\\appsettings.json",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\appsettings.json",
+              "RelativeToolTip": "StockPlatform\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-02T19:58:19.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "20250802200454_initial.cs",
+              "DocumentMoniker": "D:\\C# folder\\StockPlatform\\StockPlatform\\Migrations\\20250802200454_initial.cs",
+              "RelativeDocumentMoniker": "StockPlatform\\Migrations\\20250802200454_initial.cs",
+              "ToolTip": "D:\\C# folder\\StockPlatform\\StockPlatform\\Migrations\\20250802200454_initial.cs",
+              "RelativeToolTip": "StockPlatform\\Migrations\\20250802200454_initial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-02T20:04:56.164Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

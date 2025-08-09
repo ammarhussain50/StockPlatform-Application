@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\StockPlatform",
+    "\\StockPlatform\\Controllers",
+    "\\StockPlatform\\DTOS",
+    "\\StockPlatform\\DTOS\\Stock",
+    "\\StockPlatform\\Interfaces",
+    "\\StockPlatform\\Mappers",
+    "\\StockPlatform\\Repository"
+  ],
+  "SelectedNode": "\\StockPlatform\\Mappers\\StockMappers.cs",
+  "PreviewInSolutionExplorer": false
+}
