@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StockPlatform.Data;
@@ -23,6 +24,7 @@ namespace StockPlatform.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Getall([FromQuery] QueryObject quey)
         {
             if (!ModelState.IsValid)

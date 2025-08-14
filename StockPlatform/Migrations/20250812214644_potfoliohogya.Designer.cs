@@ -12,8 +12,8 @@ using StockPlatform.Data;
 namespace StockPlatform.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250809203306_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250812214644_potfoliohogya")]
+    partial class potfoliohogya
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,22 @@ namespace StockPlatform.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "b5d83d8d-1a8d-4a4b-8c2d-2f05f9a77e61",
+                            ConcurrencyStamp = "b5d83d8d-1a8d-4a4b-8c2d-2f05f9a77e61",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "8d88f06d-c6d3-4d42-9f7e-fbc72704e2d1",
+                            ConcurrencyStamp = "8d88f06d-c6d3-4d42-9f7e-fbc72704e2d1",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -249,7 +265,22 @@ namespace StockPlatform.Migrations
 
                     b.HasIndex("StockId");
 
-                    b.ToTable("comments");
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("StockPlatform.Models.Portfolio", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("StockId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AppUserId", "StockId");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("Portfolio");
                 });
 
             modelBuilder.Entity("StockPlatform.Models.Stock", b =>
@@ -283,7 +314,7 @@ namespace StockPlatform.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("stocks");
+                    b.ToTable("Stock");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -346,9 +377,35 @@ namespace StockPlatform.Migrations
                     b.Navigation("Stock");
                 });
 
+            modelBuilder.Entity("StockPlatform.Models.Portfolio", b =>
+                {
+                    b.HasOne("StockPlatform.Models.AppUser", "AppUser")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StockPlatform.Models.Stock", "Stock")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("StockPlatform.Models.AppUser", b =>
+                {
+                    b.Navigation("Portfolios");
+                });
+
             modelBuilder.Entity("StockPlatform.Models.Stock", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Portfolios");
                 });
 #pragma warning restore 612, 618
         }

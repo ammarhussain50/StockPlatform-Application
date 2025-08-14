@@ -4,6 +4,7 @@ using System.Xml.Linq;
 
 namespace StockPlatform.Models
 {
+    [Table("Stock")]
     public class Stock
     {
         public int Id { get; set; }
@@ -22,6 +23,7 @@ namespace StockPlatform.Models
 
         public List<Comments> Comments { get; set; } = new List<Comments>(); // // This list stores objects of the Comment class
 
+        public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>(); // This list stores objects of the Portfolio class
         internal void UpdateFromCreateDto(UpdateFromCreateDto dto)
         {
             throw new NotImplementedException();

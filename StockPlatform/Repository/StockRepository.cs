@@ -34,23 +34,40 @@ namespace StockPlatform.Repository
             await context.SaveChangesAsync();
             return stockModel;
         }
-       
-        
+
+
 
 
         public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
-            var stocks = context.stocks.Include(c => c.Comments).AsQueryable();
-            if(!string.IsNullOrWhiteSpace(query.CompanyName))
+            // Ensure valid pagination defaults
+            if (query.PageNumber <= 0)
+                query.PageNumber = 1;
+
+            if (query.PageSize <= 0)
+                query.PageSize = 20;
+
+            // Base query with comments included
+            var stocks = context.stocks
+                .Include(c => c.Comments)
+                .AsQueryable();
+
+            // Case-insensitive filtering for CompanyName
+            if (!string.IsNullOrWhiteSpace(query.CompanyName))
             {
-                stocks = stocks.Where(s => s.CompanyName.Contains(query.CompanyName));
+                var name = query.CompanyName.ToLower();
+                stocks = stocks.Where(s => s.CompanyName.ToLower().Contains(name));
             }
 
-            if(!string.IsNullOrWhiteSpace(query.Symbol))
+            // Case-insensitive filtering for Symbol
+            if (!string.IsNullOrWhiteSpace(query.Symbol))
             {
-                stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
+                var symbol = query.Symbol.ToLower();
+                stocks = stocks.Where(s => s.Symbol.ToLower().Contains(symbol));
             }
-            if(!string.IsNullOrWhiteSpace(query.SortBy))
+
+            // Sorting
+            if (!string.IsNullOrWhiteSpace(query.SortBy))
             {
                 if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
                 {
@@ -58,14 +75,29 @@ namespace StockPlatform.Repository
                         ? stocks.OrderByDescending(s => s.Symbol)
                         : stocks.OrderBy(s => s.Symbol);
                 }
+                // Add more sort options if needed
+            }
+            else
+            {
+                // Default sort by latest stock
+                stocks = stocks.OrderByDescending(s => s.Id);
             }
 
-            var skipnumber = (query.PageNumber - 1) * query.PageSize;
+            // Pagination
+            var skipNumber = (query.PageNumber - 1) * query.PageSize;
 
-          
-            return await stocks.Skip(skipnumber).Take(query.PageSize).ToListAsync();
+            return await stocks
+                .Skip(skipNumber)
+                .Take(query.PageSize)
+                .ToListAsync();
+           
 
         }
+
+
+
+
+
 
         public async Task<Stock?> GetByIdAsync(int id)
         {
