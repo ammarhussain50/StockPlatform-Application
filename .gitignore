@@ -1,0 +1,54 @@
+# Visual Studio
+.vs/
+.vscode/
+
+# Build folders
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Backup & temp files
+*~
+*.tmp
+*.temp
+*.bak
+*.log
+
+# NuGet packages
+*.nupkg
+packages/
+*.snupkg
+
+# Database files
+*.mdf
+*.ldf
+
+# Entity Framework migrations backup
+Migrations/*Designer.cs
+
+# Publish folder
+publish/
+wwwroot/lib/
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Rider
+.idea/
+
+# Coverage & test
+*.coverage
+*.coveragexml
+TestResults/
+
+# OS-specific
+.DS_Store
+Thumbs.db
