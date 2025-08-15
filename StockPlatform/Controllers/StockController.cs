@@ -24,7 +24,7 @@ namespace StockPlatform.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Getall([FromQuery] QueryObject quey)
         {
             if (!ModelState.IsValid)

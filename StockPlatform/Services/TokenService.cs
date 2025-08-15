@@ -13,10 +13,12 @@ namespace StockPlatform.Services
     public class TokenService : ITokenService
     {
         private readonly SymmetricSecurityKey _key;
+        private readonly IConfiguration config;
 
         public TokenService(IConfiguration config)
         {
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:Key"]));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:key"]));
+            this.config = config;
         }
 
         public string CreateToken(AppUser user)
@@ -24,7 +26,9 @@ namespace StockPlatform.Services
             var claims = new List<Claim>
             {
                 // ✅ Standard claim for username
-                new Claim(ClaimTypes.NameIdentifier, user.UserName)
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
+
             };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
@@ -33,7 +37,10 @@ namespace StockPlatform.Services
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(7),
-                SigningCredentials = creds
+                SigningCredentials = creds,
+                Issuer = config["JWT:Issuer"],
+                Audience = config["JWT:Audience"]
+
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

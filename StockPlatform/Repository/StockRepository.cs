@@ -90,7 +90,7 @@ namespace StockPlatform.Repository
                 .Skip(skipNumber)
                 .Take(query.PageSize)
                 .ToListAsync();
-           
+
 
         }
 

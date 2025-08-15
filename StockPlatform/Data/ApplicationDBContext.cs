@@ -9,7 +9,7 @@ namespace StockPlatform.Data
     {
         public ApplicationDBContext(DbContextOptions Options) : base(Options)
         {
-            
+
         }
         public DbSet<Stock> stocks { get; set; }
         public DbSet<Comments> comments { get; set; }
