@@ -19,5 +19,7 @@ namespace StockPlatform.Models
         //Is se hume poora Stock object mil jata hai jis se yeh comment related hai.
         //        Ye line ek Navigation Property hai.
         //Is se hume poora Stock object mil jata hai jis se yeh comment related hai.
+        public string? AppUserId { get; set; }
+        public AppUser? AppUser { get; set; }
     }
 }

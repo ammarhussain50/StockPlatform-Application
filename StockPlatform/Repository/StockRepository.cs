@@ -49,7 +49,7 @@ namespace StockPlatform.Repository
 
             // Base query with comments included
             var stocks = context.stocks
-                .Include(c => c.Comments)
+                .Include(c => c.Comments).ThenInclude(c => c.AppUser)
                 .AsQueryable();
 
             // Case-insensitive filtering for CompanyName
@@ -102,6 +102,11 @@ namespace StockPlatform.Repository
         public async Task<Stock?> GetByIdAsync(int id)
         {
             return await context.stocks.Include(c => c.Comments).FirstOrDefaultAsync(s => s.Id == id);
+        }
+
+        public async Task<Stock> GetBySymbolAsync(string symbol)
+        {
+            return await context.stocks.FirstOrDefaultAsync(s => s.Symbol == symbol);
         }
 
         public async Task<bool> StockExist(int id)

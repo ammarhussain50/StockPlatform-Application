@@ -3,20 +3,47 @@ using StockPlatform.Data;
 using StockPlatform.Interfaces;
 using StockPlatform.Models;
 
-namespace StockPlatform.Repository
-{
-    public class PortofolioRepository : IPortfolioRepository
-    {
-        private readonly ApplicationDBContext context;
 
-        public PortofolioRepository(ApplicationDBContext context)
+namespace StockPlaform.Repositories
+{
+    public class PortfolioRepository : IPortfolioRepository
+    {
+        private readonly ApplicationDBContext _context;
+
+        public PortfolioRepository(ApplicationDBContext context)
         {
-            this.context = context;
+            _context = context;
         }
-        public async Task<List<Stock>> GetUserPortfolio(AppUser user)
+
+        public async Task<Portfolio> CreatePortfolioAsync(Portfolio portfolio)
         {
+            await _context.portfolios.AddAsync(portfolio);
+            await _context.SaveChangesAsync();
+            return portfolio;
+
+        }
+
+        public async Task<Portfolio> DeletePortfolioAsync(AppUser appUser, string symbol)
+        {
+            var portfolioModel = await _context.portfolios.FirstOrDefaultAsync(x => x.AppUserId == appUser.Id && x.Stock.Symbol.ToLower() == symbol.ToLower());
+            if (portfolioModel == null)
+            {
+                return null;
+            }
+            _context.portfolios.Remove(portfolioModel);
+            await _context.SaveChangesAsync();
+            return portfolioModel;
+
+        }
+
+
+
+
+        public async Task<List<Stock>> GetUserPortfolioAsync(AppUser user)
+        {
+
             // Portfolio table me se wo records dhoondh rahe hain jahan AppUserId == current user ka Id
-            return await context.portfolios
+            return await _context.portfolios
                 .Where(u => u.AppUserId == user.Id)
 
                 // Har matching portfolio record ka related Stock object nikaal rahe hain
@@ -34,11 +61,7 @@ namespace StockPlatform.Repository
 
                 // List mein convert kar rahe hain aur async tarike se DB se fetch kar rahe hain
                 .ToListAsync();
-
-            // Select ka kaam hai://
-
-           // Har portfolio record ke andar jo Stock object linked hai, uska data nikalna.
-            //Aur us data se ek naya Stock object banana jisme sirf tumhe chahiye wale fields rakho(Id, Symbol, CompanyName, etc.).
         }
+
     }
 }

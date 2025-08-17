@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StockPlaform.Extensions;
 using StockPlatform.DTOS.Comments;
 using StockPlatform.Interfaces;
 using StockPlatform.Mappers;
@@ -13,11 +14,13 @@ namespace StockPlatform.Controllers
     {
         private readonly ICommentRepository commentrepo;
         private readonly IStockRepository Stockrepo;
+        private readonly UserManager<AppUser> userManager;
 
-        public CommentController(ICommentRepository commentrepo, IStockRepository stockrepo)
+        public CommentController(ICommentRepository commentrepo, IStockRepository stockrepo , UserManager<AppUser> UserManager)
         {
             this.commentrepo = commentrepo;
             Stockrepo = stockrepo;
+            userManager = UserManager;
         }
 
         [HttpGet]
@@ -63,7 +66,11 @@ namespace StockPlatform.Controllers
                 return NotFound("Stock not found");
             }
 
+            var username = User.GetUsername();
+            var appUser = await userManager.FindByNameAsync(username);
+
             var comment = commentDto.ToCommentFromCreate(stockId);
+            comment.AppUserId = appUser.Id;
             await commentrepo.CreateAsync(comment);
 
             return CreatedAtAction(nameof(GetById), new { id = comment.Id }, comment.ToCommentDto());

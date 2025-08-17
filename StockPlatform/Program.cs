@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using StockPlaform.Repositories;
+using StockPlaform.Services;
 using StockPlatform.Data;
 using StockPlatform.Interfaces;
 using StockPlatform.Models;
 using StockPlatform.Repository;
-using StockPlatform.Services;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,7 +90,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IPortfolioRepository, PortofolioRepository>();
+builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 
 
 var app = builder.Build();
@@ -103,8 +103,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthorization();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

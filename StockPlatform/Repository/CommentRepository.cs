@@ -35,12 +35,12 @@ namespace StockPlatform.Repository
 
         public async Task<List<Comments>> GetallAsync()
         {
-            return await context.comments.ToListAsync();
+            return await context.comments.Include(a=> a.AppUser).ToListAsync();
         }
 
         public Task<Comments?> GetByIdAsync(int id)
         {
-            return context.comments.FirstOrDefaultAsync(c => c.Id == id);
+            return context.comments.Include(a => a.AppUser).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<Comments?> UpdateAsync(int id, Comments comment)
