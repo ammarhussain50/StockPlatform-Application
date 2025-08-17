@@ -1,0 +1,119 @@
+﻿one to many limitations 
+-> we only have one stock pe platform for many users 
+-> One-to-many relationship sirf us case mein kaam karta hai jab ek entity (jaise Stock) multiple entities (Users) se linked ho, lekin reverse allowed nahi hota. Iska matlab hai ke ek User sirf ek Stock se linked ho sakta hai, multiple se nahi — is wajah se jab mutual or shared association chahiye ho (e.g. ek user ke multiple stocks ho aur ek stock ke multiple users), to yeh model fail ho jata hai.
+
+Many-to-many relationship allow karti hai ke ek user multiple stocks own kare aur ek stock multiple users ke paas ho. Porfolio join table iss association ko represent karta hai using AppUserId and StockId foreign keys.
+
+step 1: create model Porfolio 
+-> check Models > Porfolio.cs for details
+
+step 2: inside AppUser.cs add Porfolio List also in Stock.cs add Porfolio List
+-> check Models > AppUser.cs and Models > Stock.cs for details
+
+step 3: add this in ApplicationDbContext.cs
+public DbSet<Portfolio> Portfolios { get; set; } //use to create Portfolio table in database
+->also add this in OnModelCreating method
+builder.Entity<Portfolio>(x=> x.HasKey(p=> new {p.AppUserId,p.StockId}));
+->also add this in OnModelCreating method
+builder.Entity<Portfolio>()
+    .HasOne(u => u.AppUser)                  
+    .WithMany(u => u.Portfolios)            
+    .HasForeignKey(p => p.AppUserId);   
+step 4:
+delete migrations folder and database from sql server
+it is good because we change some db names and many to manny relationship etc 
+
+step 5:
+run command in terminal
+// dotnet ef migrations add InitialCreate
+// dotnet ef database update
+or in package manager console
+// Add-Migration PortfolioManyToMany
+
+// Update-Database
+
+
+--------------------------------------------------
+CRUD operations for Portfolio
+--------------------------------------------------
+first GET
+step 1: create PortfolioController
+inject IPortfolioRepository and UserManager in constructor because in jon table we need to get userId and stockId
+
+// check Controllers > PortfolioController.cs for details
+
+step 2: add GetUserPortfolioAsync method in PortfolioController
+// check Controllers > PortfolioController.cs for details
+
+step 3: createfolder Extensions > ClaimsExtensions.cs
+// check Extensions > ClaimsExtensions.cs for details
+
+Note:
+hm controller my   var username = User.GetUsername();
+           yeh line hmy claim nikal kr de rhi hy jo hmny TokenService.cs my add ki thi
+           username claim yeh wali 
+                       var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
+            };
+
+            abhi sirf username claim nikal kr de rhi hy agr email claim bhi nikalna hy to query change hogui yeh hm extension method ki madad sy nikal rhy hen 
+
+step 4: create IPortfolioRepository
+// check Interfaces > IPortfolioRepository.cs for details
+
+step 5 : impement IPortfolioRepository in PortfolioRepository
+// check Repositories > PortfolioRepository.cs for details
+
+step 6:
+inject IPortfolioRepository in PortfolioController.cs 
+
+step 7:
+in program .cs  add this line for DI
+builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+step 8: testing
+route : api/portfolio to test
+
+
+---------------------------------------------------------------------------
+CREATE
+how cretae works in many to many 
+
+we need to create Portfolio which is join table and contains UserId and StockId
+
+so,
+
+-> fiind User and Stock
+-> create Portfolio object with StockId and UserId
+-> save in db 
+
+step 1: create AddPortfolio method in PortfolioController.cs
+// check Controllers > PortfolioController.cs for details
+
+step 2: add GetAsync method in IPortfolioRepository.cs
+// check Interfaces > IPortfolioRepository.cs for details
+step 3: implement GetAsync method in PortfolioRepository.cs
+// check Repositories > PortfolioRepository.cs for details
+
+step 4: testing 
+route : api/portfolio/ POST
+
+-> add portfolio by symbol make sure the stock exists in database with same symbol
+
+
+---------------------------------------------------------------------------
+DELETE
+how delete works in many to many
+1. get User(Identity claims extension)
+2. get portfolio (portfolio repo)
+3. filter
+4. delete 
+
+step 1: create DeletePortfolio method in PortfolioController.cs
+// check Controllers > PortfolioController.cs for details
+
+step 2: add DeletePortfolioAsync method in IPortfolioRepository.cs
+// check Interfaces > IPortfolioRepository.cs for details
+step 3: implement DeletePortfolioAsync method in PortfolioRepository.cs
+// check Repositories > PortfolioRepository.cs for details

@@ -63,18 +63,23 @@ namespace StockPlatform.Data
             {
                 new IdentityRole
                 {
-                    Id = "b5d83d8d-1a8d-4a4b-8c2d-2f05f9a77e61", // Static GUID
+                    //Id = "b5d83d8d-1a8d-4a4b-8c2d-2f05f9a77e61", // Static GUID
                     Name = "Admin",
                     NormalizedName = "ADMIN",
-                    ConcurrencyStamp = "b5d83d8d-1a8d-4a4b-8c2d-2f05f9a77e61" // Match Id for simplicity
+                    //ConcurrencyStamp = "b5d83d8d-1a8d-4a4b-8c2d-2f05f9a77e61" // Match Id for simplicity
                 },
                 new IdentityRole
                 {
-                    Id = "8d88f06d-c6d3-4d42-9f7e-fbc72704e2d1", // Static GUID
+                    //Id = "8d88f06d-c6d3-4d42-9f7e-fbc72704e2d1", // Static GUID
                     Name = "User",
                     NormalizedName = "USER",
-                    ConcurrencyStamp = "8d88f06d-c6d3-4d42-9f7e-fbc72704e2d1" // Match Id for simplicity
-                }
+                    //ConcurrencyStamp = "8d88f06d-c6d3-4d42-9f7e-fbc72704e2d1" // Match Id for simplicity
+                },
+                 new IdentityRole
+                {
+                  Name = "Manager",
+                  NormalizedName = "MANAGER"
+                 }
             };
 
             builder.Entity<IdentityRole>().HasData(roles);

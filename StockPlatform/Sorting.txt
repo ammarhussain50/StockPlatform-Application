@@ -1,0 +1,60 @@
+﻿===========================================
+Sorting Feature - ASP.NET Core Step-by-Step
+===========================================
+
+1. QueryObject.cs
+------------------
+public class QueryObject
+{
+    public string? SortBy { get; set; } = null;       // Kis field par sorting honi hai
+    public bool IsDescending { get; set; } = false;   // Ascending ya Descending
+}
+
+2. IStockRepository.cs
+-----------------------
+Task<List<Stock>> GetAllAsync(QueryObject query);
+
+3. StockRepository.cs
+----------------------
+public async Task<List<Stock>> GetAllAsync(QueryObject query)
+{
+    var stocks = _context.Stocks.Include(c => c.Comments).AsQueryable();
+
+    // Sorting logic
+    if (!string.IsNullOrWhiteSpace(query.SortBy))
+    {
+        if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
+        {
+            stocks = query.IsDescending
+                ? stocks.OrderByDescending(s => s.Symbol)
+                : stocks.OrderBy(s => s.Symbol);
+        }
+        else if (query.SortBy.Equals("CompanyName", StringComparison.OrdinalIgnoreCase))
+        {
+            stocks = query.IsDescending
+                ? stocks.OrderByDescending(s => s.CompanyName)
+                : stocks.OrderBy(s => s.CompanyName);
+        }
+        // Yahan aur fields add ki ja sakti hain jaise MarketCap, LastDiv
+    }
+
+    return await stocks.ToListAsync();
+}
+
+4. StockController.cs
+-----------------------
+[HttpGet]
+public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
+{
+    var stocks = await _stockRepository.GetAllAsync(query);
+    var stockDto = stocks.Select(s => s.ToStockDto()).ToList();
+    return Ok(stockDto);
+}
+
+5. Test Instructions (Browser, Swagger, Postman)
+--------------------------------------------------
+GET /api/stock?SortBy=Symbol&IsDescending=false     -> Symbol ascending
+GET /api/stock?SortBy=Symbol&IsDescending=true      -> Symbol descending
+
+GET /api/stock?SortBy=CompanyName&IsDescending=false  -> CompanyName ascending
+GET /api/stock?SortBy=CompanyName&IsDescending=true   -> CompanyName descending

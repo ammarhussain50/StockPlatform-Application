@@ -1,0 +1,172 @@
+﻿Title: QueryObject Filtering System in ASP.NET Core Web API (With Explanation)
+
+
+Step 1: Create QueryObject Class
+
+
+ File: Helpers/QueryObject.cs
+
+Code:
+-----------------------------------------
+namespace YourProject.Helpers
+{
+    public class QueryObject
+    {
+        public string? CompanyName { get; set; }
+        public string? Symbol { get; set; }
+    }
+}
+-----------------------------------------
+
+ Explanation:
+- Yeh ek simple class hai jo query string values ko capture karegi.
+- Agar user request kare `/api/stock?CompanyName=Tesla`, to `CompanyName` property mein "Tesla" store ho jayega.
+- Yeh class controller mein [FromQuery] ke through automatically fill hoti hai.
+
+
+Step 2: Modify IStockRepository Interface
+
+
+ File: Interfaces/IStockRepository.cs
+
+Code:
+-----------------------------------------
+Task<List<Stock>> GetAllAsync(QueryObject query);
+-----------------------------------------
+
+ Explanation:
+- Yeh method interface mein define kiya gaya hai taake har class jo IStockRepository implement kare, usme yeh method lazmi ho.
+- Is method ka kaam filtered stocks list dena hoga based on `QueryObject`.
+
+
+Step 3: Implement Filtering in Repository
+
+
+ File: Repositories/StockRepository.cs
+
+Code:
+-----------------------------------------
+public async Task<List<Stock>> GetAllAsync(QueryObject query)
+{
+    var stocks = _context.Stocks.Include(s => s.Comments).AsQueryable();
+
+    if (!string.IsNullOrWhiteSpace(query.CompanyName))
+    {
+        stocks = stocks.Where(s => s.CompanyName.Contains(query.CompanyName));
+    }
+
+    if (!string.IsNullOrWhiteSpace(query.Symbol))
+    {
+        stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
+    }
+
+    return await stocks.ToListAsync();
+}
+-----------------------------------------
+
+ Explanation:
+- `_context.Stocks.Include(...)`: Yeh database se stocks ke sath comments bhi la raha hai.
+- `.AsQueryable()`: Is se hum query ko dynamic bana sakte hain aur filters runtime pe add kar sakte hain.
+- `Where(...)`: Filter lagaya gaya hai agar `CompanyName` ya `Symbol` provided ho.
+- `ToListAsync()`: Final query ab SQL server pe chali jayegi aur result memory mein load hoga.
+
+
+Step 4: Accept Filters in Controller
+
+
+ File: Controllers/StockController.cs
+
+Code:
+-----------------------------------------
+[HttpGet]
+public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
+{
+    if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+
+    var stocks = await _stockRepo.GetAllAsync(query);
+    var stockDtos = stocks.Select(s => s.ToStockDto());
+
+    return Ok(stockDtos);
+}
+-----------------------------------------
+
+ Explanation:
+- `[FromQuery]`: Yeh batata hai ASP.NET ko ke query string values `QueryObject` mein map karni hain.
+- `GetAllAsync(query)`: Repository method call hoti hai jo filtered data return karegi.
+- `ToStockDto()`: Yeh method stock ko DTO (Data Transfer Object) mein convert karta hai taake frontend ko sirf zaroori data mile.
+
+
+Step 5: Test with Postman or Browser
+
+
+Examples:
+-----------------------------------------
+GET /api/stock?CompanyName=Apple
+GET /api/stock?Symbol=AAPL
+GET /api/stock?CompanyName=Tesla&Symbol=TSLA
+-----------------------------------------
+
+ Explanation:
+- Tum GET request mein query string de kar filter apply kar sakte ho.
+- Yeh query `QueryObject` mein map hoti hai aur DB pe filter apply hota hai.
+
+
+Optional Step: Add Pagination
+
+
+ Update Helpers/QueryObject.cs
+
+Code:
+-----------------------------------------
+public class QueryObject
+{
+    public string? CompanyName { get; set; }
+    public string? Symbol { get; set; }
+    public int PageNumber { get; set; } = 1;
+    public int PageSize { get; set; } = 10;
+}
+-----------------------------------------
+
+Explanation:
+- Pagination ke liye PageNumber aur PageSize properties add ki gayi hain.
+- Default values bhi set ki gayi hain taake agar user provide na kare to bhi query work kare.
+
+ Modify filtering logic in StockRepository:
+
+Code:
+-----------------------------------------
+stocks = stocks.Skip((query.PageNumber - 1) * query.PageSize)
+               .Take(query.PageSize);
+-----------------------------------------
+
+ Explanation:
+- `.Skip(...)` se records skip honge e.g. Page 2 pe ho to first 10 skip karega.
+- `.Take(...)` se specific number of records return honge.
+
+ Final Checklist:
+
+
+ Step 1: Create QueryObject  
+ Step 2: Update IStockRepository  
+ Step 3: Filter logic in StockRepository  
+ Step 4: Controller uses [FromQuery]  
+ Step 5: Test with URL  
+
+ Test via Browser (if using Swagger or GET method):
+
+Example 1: Filter by CompanyName  
+URL: http://localhost:port/api/stock?CompanyName=Apple  
+Expected Result: Returns all stocks where company name contains "Apple"
+
+Example 2: Filter by Symbol  
+URL: http://localhost:port/api/stock?Symbol=AAPL  
+Expected Result: Returns stocks where symbol contains "AAPL"
+
+Example 3: Filter by both CompanyName and Symbol  
+URL: http://localhost:port/api/stock?CompanyName=Tesla&Symbol=TSLA  
+Expected Result: Returns stocks where both conditions are met
+
+Example 4: With Pagination  
+URL: http://localhost:port/api/stock?PageNumber=2&PageSize=5  
+Expected Result: Returns page 2 with 5 stocks per page

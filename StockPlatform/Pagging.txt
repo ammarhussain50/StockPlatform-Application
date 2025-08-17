@@ -1,0 +1,118 @@
+﻿Pagination in ASP.NET Core (with Filtering and Sorting)
+--------------------------------------------------------
+
+What is Pagination?
+-------------------
+Pagination ka matlab hota hai data ko chhote chhote pages mein divide karna. Jab database mein bohot zyada records hoon (e.g. 1000+ stocks), to sab data ek hi request mein bhejna slow aur inefficient hota hai. 
+
+Isliye, hum pagination use karte hain taake:
+- Har request mein sirf limited items (e.g. 10, 20) hi aayein
+- Application fast chale
+- User easily next/previous pages pe navigate kar sake
+
+--------------------------------------------------------
+
+1. QueryObject.cs (Helper Class)
+
+namespace StockPlaform.Helpers
+{
+    public class QueryObject
+    {
+        public string? CompanyName { get; set; }
+        public string? Symbol { get; set; }
+
+        public string? SortBy { get; set; }
+        public bool IsDescending { get; set; }
+
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 20; // Har page par maximum 20 records
+    }
+}
+
+--------------------------------------------------------
+
+2. StockRepository.cs - GetAllAsync Method
+
+public async Task<List<Stock>> GetAllAsync(QueryObject query)
+{
+    var stocks = _context.Stocks.Include(c => c.Comments).AsQueryable();
+
+    // Filtering (optional)
+    if (!string.IsNullOrEmpty(query.CompanyName))
+    {
+        stocks = stocks.Where(s => s.CompanyName.Contains(query.CompanyName));
+    }
+
+    if (!string.IsNullOrEmpty(query.Symbol))
+    {
+        stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
+    }
+
+    // Sorting (optional)
+    if (!string.IsNullOrWhiteSpace(query.SortBy))
+    {
+        if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
+        {
+            stocks = query.IsDescending
+                ? stocks.OrderByDescending(s => s.Symbol)
+                : stocks.OrderBy(s => s.Symbol);
+        }
+        else if (query.SortBy.Equals("CompanyName", StringComparison.OrdinalIgnoreCase))
+        {
+            stocks = query.IsDescending
+                ? stocks.OrderByDescending(s => s.CompanyName)
+                : stocks.OrderBy(s => s.CompanyName);
+        }
+    }
+
+    // Pagination
+    var skipNumber = (query.PageNumber - 1) * query.PageSize;
+    return await stocks.Skip(skipNumber).Take(query.PageSize).ToListAsync();
+}
+
+--------------------------------------------------------
+
+3. How Pagination Works
+
+Formula:
+Skip = (PageNumber - 1) * PageSize
+
+Example:
+PageNumber = 1, PageSize = 20 => Skip(0), Take(20)
+PageNumber = 2, PageSize = 20 => Skip(20), Take(20)
+PageNumber = 3, PageSize = 10 => Skip(20), Take(10)
+
+Yani har page ke liye hum kuch records "skip" karte hain aur "take" karte hain jitni quantity chahiye hoti hai.
+
+--------------------------------------------------------
+
+4. Sample API Call
+
+GET /api/stock?CompanyName=Apple&PageNumber=2&PageSize=10
+
+- CompanyName filter karega sirf "Apple" wale stocks
+- Page 2 ka data milega (10 records per page)
+- Backend skip karega 10 records aur next 10 return karega
+
+--------------------------------------------------------
+
+
+Total Records in DB = 40
+
+Test Case 1:
+GET /api/stock?PageNumber=1&PageSize=10
+Skip = (1 - 1) * 10 = 0
+Take = 10
+Returned Records: 1 to 10
+
+Test Case 2:
+GET /api/stock?PageNumber=2&PageSize=10
+Skip = (2 - 1) * 10 = 10
+Take = 10
+Returned Records: 11 to 20
+
+Test Case 3:
+GET /api/stock?PageNumber=4&PageSize=10
+Skip = (4 - 1) * 10 = 30
+Take = 10
+Returned Records: 31 to 40

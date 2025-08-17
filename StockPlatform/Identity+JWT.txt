@@ -1,0 +1,383 @@
+﻿﻿for identity + jwt authentication in ASP.NET Core
+
+Basic setup
+
+===============================================================================
+GOAL:
+-----
+- User login/register system (using Identity)
+- JWT token issue karna login pe
+- APIs ko secure karna using [Authorize] + JWT
+
+===============================================================================
+Step 1: Install Required Packages
+---------------------------------
+Yeh 3 NuGet packages install karo:
+
+1. Microsoft.Extensions.Identity.Core
+   -> Identity ka base system enable karta hai.
+
+2. Microsoft.AspNetCore.Identity.EntityFrameworkCore
+   -> Identity ko Entity Framework ke saath connect karta hai.
+
+3. Microsoft.AspNetCore.Authentication.JwtBearer
+   -> JWT token ko app mein handle karta hai.
+
+Yeh tino packages **har project mein chahiye hote hain** jab JWT + Identity use kar rahe ho.
+
+===============================================================================
+Step 2: Create AppUser Model
+-----------------------------
+public class AppUser : IdentityUser { }
+
+Matlab: 
+ASP.NET ka built-in `IdentityUser` inherit karna hai aur `AppUser` naam ka apna custom user class banana hai.  
+Custom fields future mein yahan add kar sakte ho (e.g. FullName, Role, etc.).
+
+Yeh step har project mein hota hai.
+
+===============================================================================
+Step 3: Modify ApplicationDbContext
+-----------------------------------
+Replace:
+    public class ApplicationDbContext : DbContext
+
+With:
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
+
+Matlab:
+Ab aapka database sirf Stocks, Comments jese models nahi, balkay Identity ke Users, Roles, Tokens waghera bhi handle karega.
+
+===============================================================================
+Step 4: Configure Identity + JWT in Program.cs
+----------------------------------------------
+
+1. Identity Configuration:
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 12;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>();
+
+Yeh Identity service ko enable karta hai aur batata hai ke data store kaha hoga (ApplicationDbContext).
+
+2. JWT Configuration:
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+    };
+});
+
+Matlab:
+Yeh batata hai ke JWT token kaise validate hoga:
+- Kon bana raha hai token? (Issuer)
+- Kon use kar raha hai? (Audience)
+- Kya token sahi se sign hua hai? (Key)
+
+===============================================================================
+Step 5: appsettings.json mein JWT section add karo
+---------------------------------------------------
+"JWT": {
+  "Key": "swordfish", your jwt secret
+  "Issuer": "https://localhost:7165", or your domain name
+  "Audience": "https://localhost:7165"
+}
+
+Yeh woh config values hain jo JWT token generate aur validate karte waqt use hoti hain. 
+Yeh values tumhare project ke hisaab se change hongi.
+
+===============================================================================
+Step 6: Add Middleware in Program.cs
+-------------------------------------
+app.UseAuthentication();
+app.UseAuthorization();
+
+Matlab:
+Har incoming request ke liye pehle check hoga ke user JWT token ke through authenticated hai ya nahi, 
+phir uske authorization rights dekhe jayenge.
+
+===============================================================================
+Step 7: Create Migration and Update Database
+--------------------------------------------
+Command Line se:
+> dotnet ef migrations add InitialIdentityMigration
+> dotnet ef database update
+
+Ya Visual Studio ke Package Manager Console se:
+> Add-Migration InitialIdentityMigration
+> Update-Database
+
+Matlab:
+Yeh step sab required Identity aur tumhare custom tables ko DB mein create karta hai.
+
+===============================================================================
+Summary: Reusable vs Custom Code
+---------------------------------
+
+REUSABLE (Har Project mein reuse hota hai):
+- Identity & JWT packages
+- AppUser class (structure same, fields may change)
+- IdentityDbContext usage
+- Identity & JWT setup in Program.cs
+- app.UseAuthentication(), app.UseAuthorization()
+- Migration flow
+
+PROJECT-SPECIFIC (Har Project mein alag hota hai):
+- JWT key, issuer, audience (appsettings.json)
+- AppUser custom properties (like FullName)
+- Password policy configuration
+- Tumhare models jaise Stock, Comment etc.
+
+
+
+
+===============================================================================
+ASP.NET Core Web API – Identity + JWT (AccountController Setup + Roles) 
+---------------------------------
+
+Register & Login ke liye controller banao
+
+step 1:  
+create new controller eg: Account controller  
+🔹 Yahan hum ek naya controller bana rahe hain jiska naam AccountController hoga. Ye controller register aur login ka kaam karega.
+
+step 2:  
+inject the usermodel like below  
+
+public class AccountController : ControllerBase
+{
+    private readonly UserManager<AppUser> _userManager;
+
+    public AccountController(UserManager<AppUser> userManager)
+    {
+        _userManager = userManager;
+    }
+}
+
+- Yahan hum Identity ka UserManager<AppUser> inject kar rahe hain jo user create, delete, find jaise operations handle karta hai.  
+- AppUser tumhara custom user model hai jo IdentityUser se inherit karta hai.  
+- <AppUser> -> tumhara user model  
+- UserManager -> Identity ka built-in helper class jo user related logic handle karta hai
+
+step 3:  
+add post routes  
+-> you can use dtos , go and create dtos and use in AccountController.cs  
+-> check AccountController.cs for details  
+-> check Account > RegisterRequestDto.cs for details  
+-> check Mappers > AccountMappers.cs for details  
+
+- Yahan tum controller mein POST method banaoge jisme user registration ya login ka logic hoga.  
+- Hum DTOs ka use karte hain taake request aur response ko model se separate rakhein — cleaner aur reusable banane ke liye.  
+- RegisterRequestDto ek class hai jo registration request ka data hold karegi (jaise email, username, password).
+
+step 4:  
+define roles  
+-> we are using roles becauses we want to restrict access to some apis if we not use roles anyone can access all apis  
+-> because in program.cs we define roles IdentityRole so we need to create roles  
+
+- Yahan hum roles define kar rahe hain (User, Admin, Manager) taake har user ko specific access mil sake.  
+- Har koi har API access na kar sake is wajah se roles use karna important hota hai.  
+- Program.cs mein hum ne AddIdentity<AppUser, IdentityRole>() likha tha, to humein IdentityRole ke roles bhi create karne padenge.
+
+-> in ApplicationDbContext.cs Seed Roles
+
+protected override void OnModelCreating(ModelBuilder builder)
+{
+    base.OnModelCreating(builder);
+
+    var roles = new List<IdentityRole>
+    {
+        new IdentityRole
+        {
+            Name = "User",
+            NormalizedName = "USER"
+        },
+        new IdentityRole
+        {
+            Name = "Admin",
+            NormalizedName = "ADMIN"
+        }
+    };
+
+    builder.Entity<IdentityRole>().HasData(roles);
+}
+
+- Yeh code ApplicationDbContext mein likhna hota hai. Yeh Seed ka kaam karega — yani pehle se DB mein 3 roles add kar dega: User, Admin, Manager.  
+- HasData() ka matlab hota hai ke yeh data migration ke through DB mein seed ho jayega.
+
+step 4:  
+migrations to seed  
+
+> dotnet ef migrations add SeedRoles  
+> dotnet ef database update  
+// or in Visual Studio Package Manager Console  
+> Add-Migration SeedRoles  
+> Update-Database
+
+- Ab jab roles ka code likh liya hai, usko database mein apply karne ke liye Migration banani hogi.  
+- Migration ka matlab hota hai database ko update karne ka process taake naye roles add ho jayein.
+
+step 5:  
+add users using swagger  
+
+- Ab tum Swagger se POST /api/account/register ka use karke naye users bana sakte ho, jinko roles assign ho sakte hain.  
+
+step 6:
+- check kro kya roles sahi se assign hue hain ya nahi.
+-users aye dbo.AspNetUsers
+
+
+
+
+--------------------------------------------------------
+now create claims for jwt token 
+
+JWT Claims – Simple Explanation
+
+📌 What are Claims?
+Claims = JWT token ke andar chhupi user info.
+API ko batata hai: ye user kaun hai, kya kar sakta hai.
+
+Example Claims (token ke andar):
+{
+  "sub": "a1b2c3",              // user id
+  "email": "user@gmail.com",
+  "role": "Admin",
+  "FullName": "Shazeel Khan",
+  "exp": 1720000000             // expiry time
+}
+
+ Common Claims:
+- sub       → Subject (User ID)
+- email     → User’s email
+- role      → User’s role (Admin/User)
+- exp       → Expiry timestamp
+- FullName  → (Custom) User's name
+
+JWT Flow with Claims:
+1. Login → user verified
+2. List<Claim> banti hai
+3. JWT token generate hota hai with claims
+4. Client ko token milta hai
+5. Har request mein token bheja jata hai
+6. API token read karke access verify karti hai
+
+
+📦 Repository → sirf database ka kaam karta hai (CRUD).  
+⚙️ Service → business logic handle karta hai (login, register, JWT, roles).  
+Repository = data uthana/saving  
+Service = decision lena, process karna 
+
+--------------------------------------------------------
+step 1: create interface for service
+check ITokenService.cs for details inside it we create a method to create token
+
+step 2: create service class
+check TokenService.cs for details
+inhertit ITokenService and implement the method to create token
+
+step:3 
+// register Token service in program.cs via DI
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+step 4:  create dto
+check Dtos> Account> NewUserDto.cs for Details
+
+step 5: inject ItokenService in AccountController.cs
+
+step 6: cretae mapper 
+ public static NewUserDto ToNewUserDto(this AppUser user, string token)
+        {
+            return new NewUserDto
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Token = token
+            };
+        }
+step 7: use mapper in controller 
+if (roleResult.Succeeded)
+                    {
+                        // Generate JWT token for the new user
+                        var token =  _tokenService.CreateToken(appUser);
+
+                        // Use mapper to convert to NewUserDto
+                        var newUserDto = appUser.ToNewUserDto(token);
+
+                        return Ok(newUserDto);
+                    }
+
+step 8: test now in 
+/api/account/register it should return token
+
+
+--------------------------------------------------------
+now create login functionality 
+step 1: create dto for login
+check Dtos > Account > LoginRequestDto.cs for details
+
+step 2: add login method in AccountController.cs
+check AccountController.cs for details
+step 3: inject SignInManager in AccountController.cs
+
+step 4: create dto check Dtos > Account > LoginResponseDto.cs for details
+step 5: use mapper to convert to LoginResponseDto
+check Mappers > AccountMappers.cs for details
+step 6: put swagger configuration in Program.cs for jwt
+
+builder.Services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
+
+
+a authorize button in swagger to test login
+
+step 7: put [Authorize] attribute on the controller or specific methods you want to secure
+step 8: testing 
+ -> create account using register api
+ -> login using login api it will give you token 
+ -> copy that token
+ -> go to swagger and click on authorize button
+ -> paste the token in the input field
+ -> now you can access the secured APIs
+ note if you [Authorize] secured API without token it will give you 401 unauthorized error
