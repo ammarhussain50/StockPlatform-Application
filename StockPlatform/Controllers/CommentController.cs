@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StockPlaform.Extensions;
+using StockPlaform.Services;
 using StockPlatform.DTOS.Comments;
+using StockPlatform.Helpers;
 using StockPlatform.Interfaces;
 using StockPlatform.Mappers;
 using StockPlatform.Models;
@@ -15,23 +19,26 @@ namespace StockPlatform.Controllers
         private readonly ICommentRepository commentrepo;
         private readonly IStockRepository Stockrepo;
         private readonly UserManager<AppUser> userManager;
+        private readonly IFMPService fmpservice;
 
-        public CommentController(ICommentRepository commentrepo, IStockRepository stockrepo , UserManager<AppUser> UserManager)
+        public CommentController(ICommentRepository commentrepo, IStockRepository stockrepo , UserManager<AppUser> UserManager , IFMPService fmpservice)
         {
             this.commentrepo = commentrepo;
             Stockrepo = stockrepo;
             userManager = UserManager;
+            this.fmpservice = fmpservice;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [Authorize]
+        public async Task<IActionResult> GetAll([FromQuery]CommentQueryObject QueryObject)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var comments = await commentrepo.GetallAsync();
+            var comments = await commentrepo.GetallAsync(QueryObject);
             var commentDto = comments.Select(c => c.ToCommentDto());
             return Ok(commentDto);
         }
@@ -53,28 +60,55 @@ namespace StockPlatform.Controllers
             return Ok(comment.ToCommentDto());
         }
 
-        [HttpPost("{stockId:int}")]
-        public async Task<IActionResult> Create(int stockId, [FromBody] CreateCommentDto commentDto)
+        [HttpPost("{symbol:alpha}")]
+        public async Task<IActionResult> Create(string symbol, [FromBody] CreateCommentDto createDto)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState); // to get all validation errors we provided in dtos
             }
 
-            if (!await Stockrepo.StockExist(stockId))
+            if (createDto == null)
             {
-                return NotFound("Stock not found");
+                return BadRequest("Invalid comment data.");
             }
 
-            var username = User.GetUsername();
-            var appUser = await userManager.FindByNameAsync(username);
+            var stock = await Stockrepo.GetBySymbolAsync(symbol);
 
-            var comment = commentDto.ToCommentFromCreate(stockId);
-            comment.AppUserId = appUser.Id;
-            await commentrepo.CreateAsync(comment);
+            if (stock == null)
+            {
+                stock = await fmpservice.FindStockBySymbolAsync(symbol);
+                if (stock == null)
+                {
+                    return BadRequest("stock not exist at fmp");
+                }
 
-            return CreatedAtAction(nameof(GetById), new { id = comment.Id }, comment.ToCommentDto());
+                else
+                {
+                    // If stock is not found in the database, create a new stock entry
+
+                    //stock.Symbol = symbol;
+                    await Stockrepo.CreateAsync(stock);
+
+
+                }
+
+            }
+
+
+
+
+
+
+            //get user from jwt token claims
+            var userName = User.GetUsername();
+            var appUser = await userManager.FindByNameAsync(userName);
+            var newComment = createDto.ToCommentFromCreate(stock.Id);
+            newComment.AppUserId = appUser.Id; // set the AppUserId from the authenticated user
+            await commentrepo.CreateAsync(newComment);
+            return CreatedAtAction(nameof(GetById), new { id = newComment.Id }, newComment.ToCommentDto());
         }
+
 
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateCommentDto updatedto)

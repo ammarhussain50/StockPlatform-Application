@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using StockPlaform.Repositories;
@@ -10,7 +9,6 @@ using StockPlatform.Data;
 using StockPlatform.Interfaces;
 using StockPlatform.Models;
 using StockPlatform.Repository;
-using System;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -62,6 +60,8 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 // Register the PortfolioRepository
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+builder.Services.AddScoped<IFMPService, FMPService>();
+builder.Services.AddHttpClient<IFMPService,FMPService>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
@@ -114,6 +114,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// CORS setup 
+app.UseCors(x => x
+    .AllowAnyMethod()                //  Sab HTTP methods allow (GET, POST, PUT, DELETE, etc.)
+    .AllowAnyHeader()                //  Sab headers allow (e.g., Authorization, Content-Type)
+    .AllowCredentials()             //  Cookies or JWT bhejne ki permission milti hai
+    .SetIsOriginAllowed(origin => true) //  Har origin allow hoga (sirf development ke liye theek)
+                                        // .WithOrigins("http://localhost:3000 or url") //  Use this instead in production for safety
+);
+
 app.UseAuthentication();
 app.UseAuthorization();
 

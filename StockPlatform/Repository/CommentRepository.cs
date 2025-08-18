@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StockPlatform.Data;
+using StockPlatform.Helpers;
 using StockPlatform.Interfaces;
 using StockPlatform.Models;
 
@@ -33,9 +34,19 @@ namespace StockPlatform.Repository
             return comment;
         }
 
-        public async Task<List<Comments>> GetallAsync()
+        public async Task<List<Comments>> GetallAsync(CommentQueryObject QueryObject)
         {
-            return await context.comments.Include(a=> a.AppUser).ToListAsync();
+            var comment =  context.comments.Include(a => a.AppUser).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(QueryObject.Symbol))
+            {
+                comment = comment.Where(c => c.Stock.Symbol == QueryObject.Symbol);
+            };
+            if(QueryObject.IsDecsending == true)
+            {
+                comment = comment.OrderByDescending(c => c.CreatedOn);
+            }
+               return await comment.ToListAsync();
         }
 
         public Task<Comments?> GetByIdAsync(int id)

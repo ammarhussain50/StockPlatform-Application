@@ -1,4 +1,5 @@
-﻿using StockPlatform.DTOS.Stock;
+﻿using StockPlaform.Dtos.Stock;
+using StockPlatform.DTOS.Stock;
 using StockPlatform.Models;
 
 namespace StockPlatform.Mappers
@@ -21,6 +22,20 @@ namespace StockPlatform.Mappers
                 Industry = StockModel.Industry,
                 MarketCap = StockModel.MarketCap,
                 Comments = StockModel.Comments.Select(c => c.ToCommentDto()).ToList() // Assuming you have a ToCommentDto method in Comments mapper
+            };
+        }
+
+
+        public static Stock ToStockFromFMP(this FMPStock fmpstock)
+        {
+            return new Stock
+            {
+                Symbol = fmpstock.symbol,
+                CompanyName = fmpstock.companyName,
+                Purchase = (decimal)fmpstock.price,
+                LastDiv = (decimal)fmpstock.lastDiv,
+                Industry = fmpstock.industry,
+                MarketCap = fmpstock.mktCap
             };
         }
 
